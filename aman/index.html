@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استخراج الرقم السري لمصرف الأمان</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            padding: 20px;
+            max-width: 400px;
+            margin-top: 50px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>استخراج الرقم السري لمصرف الأمان</h2>
+        <input type="text" id="accountNumber" placeholder="أدخل رقم الحساب المكون من 14 رقمًا">
+        <button onclick="extractPassword()">استخراج الرقم السري</button>
+        <div id="result" class="result"></div>
+        <div id="code" class="result"></div>
+    </div>
+
+    <script>
+        function extractPassword() {
+            const accountNumber = document.getElementById('accountNumber').value;
+            if (accountNumber.length !== 14 || isNaN(accountNumber)) {
+                alert('يرجى إدخال رقم حساب صحيح مكون من 14 رقمًا.');
+                return;
+            }
+
+            const digits = accountNumber.split('');
+            const password = digits[9] + digits[2] + digits[12] + digits[8];
+            document.getElementById('result').innerText = 'الرقم السري المستخرج: ' + password;
+            document.getElementById('code').innerText = 'كود الاستفسار: *3' + password;
+        }
+    </script>
+</body>
+</html>
