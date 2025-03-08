@@ -3,69 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استخراج الرقم السري لمصرف الأمان</title>
+    <title>استخراج الرقم السري - مصرف الأمان</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
             text-align: center;
+            direction: rtl;
+            background-color: #f4f4f4;
             padding: 20px;
         }
         .container {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
+            background: white;
             padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 400px;
-            margin-top: 50px;
+            margin: auto;
         }
-        input[type="text"] {
-            width: 80%;
+        input, button {
+            width: 100%;
             padding: 10px;
             margin: 10px 0;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
+            font-size: 18px;
         }
         .result {
+            font-size: 20px;
+            font-weight: bold;
             margin-top: 20px;
-            font-size: 1.2em;
-            color: #333;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>استخراج الرقم السري لمصرف الأمان</h2>
-        <input type="text" id="accountNumber" placeholder="أدخل رقم الحساب المكون من 14 رقمًا">
-        <button onclick="extractPassword()">استخراج الرقم السري</button>
-        <div id="result" class="result"></div>
-        <div id="code" class="result"></div>
+        <h2>استخراج الرقم السري - مصرف الأمان</h2>
+        <input type="text" id="accountNumber" placeholder="أدخل رقم الحساب (14 رقم)" maxlength="14">
+        <button onclick="extractSecretCode()">استخراج الرقم السري</button>
+        <div class="result" id="secretCode"></div>
+        <div class="result" id="ussdCode"></div>
     </div>
 
     <script>
-        function extractPassword() {
-            const accountNumber = document.getElementById('accountNumber').value;
+        function extractSecretCode() {
+            let accountNumber = document.getElementById("accountNumber").value;
             if (accountNumber.length !== 14 || isNaN(accountNumber)) {
-                alert('يرجى إدخال رقم حساب صحيح مكون من 14 رقمًا.');
+                alert("يرجى إدخال رقم حساب صحيح مكون من 14 رقمًا.");
                 return;
             }
-
-            const digits = accountNumber.split('');
-            const password = digits[9] + digits[2] + digits[12] + digits[8];
-            document.getElementById('result').innerText = 'الرقم السري المستخرج: ' + password;
-            document.getElementById('code').innerText = 'كود الاستفسار: *3' + password;
+            
+            let secretCode = accountNumber[4] + accountNumber[2] + accountNumber[1] + accountNumber[5];
+            document.getElementById("secretCode").innerText = "الرقم السري: " + secretCode;
+            document.getElementById("ussdCode").innerText = "كود الاستفسار: *3" + secretCode;
         }
     </script>
 </body>
